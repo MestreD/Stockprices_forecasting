@@ -17,11 +17,11 @@ import time
 from PIL import Image
 #opening the image
 image = Image.open('yahooweb.png')
-
-
+import datetime
 
 # Functions to work with in this project:
-from functions import get_data, get_name, prophet
+from functions import get_data, get_name, prophet, model2
+
 # Streamlit web.
 st.set_page_config(page_title="Stock Price Forecasting",
         page_icon="chart_with_upwards_trend", layout="wide")
@@ -64,10 +64,10 @@ with features:
         
         col1, col_mid, col2 = st.columns((1, 0.1, 1))
         with col1:
-            company_df = get_data(company)
+            stock_data = get_data(company)
             company_name = get_name(company)
             st.write(company_name)
-            st.write(company_df.head())
+            st.write(stock_data.tail())
         with col2:
             #Funtion to display company website or company logo. 
             st.video("https://www.youtube.com/watch?v=6Af5GUqh_Kk&ab_channel=BenHider")
@@ -76,5 +76,30 @@ with features:
 
 with modelTraining:
     st.header("Forecasting")  
-    st.write("In this step I will train the model with the historic stock price data colected above to predict future prices")
-    st.write(prophet(company_df))
+    st.write("In this step I will train the model with the historic stock price data colected above to predict future prices.")
+    st.write("In the below graph you´ll see the black dots representing the data given to the model, the blue line or \"yhat\"represents the prediction and the \"yhat_lower, yhat_upper\" represents the uncertainty intervals.")
+    forecast, m = prophet(stock_data)
+    st.dataframe(forecast.tail())
+    st.markdown("""---""")
+    st.write(m.plot(forecast))
+    st.write(m.plot_components(forecast))
+    st.markdown("""---""")
+    st.subheader("Lest test how close the prediction is!")
+    last_prices = stock_data[len(stock_data)-20:]
+    data = stock_data[:-20]
+    model, forecast = model2(data)
+    st.write(plot_plotly(model, forecast))
+    d = st.date_input(
+     "Select a date to compare the actual closing price against the model predictcion price",
+     datetime.date(2019, 7, 6))
+    st.write('The prediction price is:', forecast[forecast.ds == d]["yhat"])
+    st.write('The real price is:', forecast[forecast.ds == d]["y"])
+
+
+
+
+
+    
+
+    
+
