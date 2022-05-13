@@ -23,6 +23,9 @@ import datetime
 from functions import get_data, get_name, prophet, model2
 
 # Streamlit web.
+
+base="dark"
+primaryColor="purple"
 st.set_page_config(page_title="Stock Price Forecasting",
         page_icon="chart_with_upwards_trend", layout="wide")
 
@@ -74,26 +77,27 @@ with features:
     st.write('\n')
     st.markdown("""---""")
 
-with modelTraining:
-    st.header("Forecasting")  
-    st.write("In this step I will train the model with the historic stock price data colected above to predict future prices.")
-    st.write("In the below graph you´ll see the black dots representing the data given to the model, the blue line or \"yhat\"represents the prediction and the \"yhat_lower, yhat_upper\" represents the uncertainty intervals.")
-    forecast, m = prophet(stock_data)
-    st.dataframe(forecast.tail())
-    st.markdown("""---""")
-    st.write(m.plot(forecast))
-    st.write(m.plot_components(forecast))
-    st.markdown("""---""")
-    st.subheader("Lest test how close the prediction is!")
-    last_prices = stock_data[len(stock_data)-20:]
-    data = stock_data[:-20]
-    model, forecast = model2(data)
-    st.write(plot_plotly(model, forecast))
-    d = st.date_input(
-     "Select a date to compare the actual closing price against the model predictcion price",
-     datetime.date(2019, 7, 6))
-    st.write('The prediction price is:', forecast[forecast.ds == d]["yhat"])
-    st.write('The real price is:', forecast[forecast.ds == d]["y"])
+    with modelTraining:
+        st.header("Forecasting")  
+        st.write("In this step I will train the model with the historic stock price data collected above to predict future prices.")
+        st.write("In the below graph you´ll see the black dots representing the data given to the model, the blue line or \"yhat\"represents the prediction and the \"yhat_lower, yhat_upper\" represents the uncertainty intervals.")
+        forecast, m = prophet(stock_data)
+        st.dataframe(forecast.tail())
+        st.markdown("""---""")
+        st.write(m.plot(forecast))
+        st.write(m.plot_components(forecast))
+        st.markdown("""---""")
+        st.subheader("Lest test how close the prediction is!")
+        last_prices = stock_data[len(stock_data)-20:]
+        data = stock_data[:-20]
+        model, forecast = model2(data)
+        st.write(plot_plotly(model, forecast))
+        d = st.date_input("Select a date to compare the actual closing price against the model prediction price", datetime.date(2019, 7, 6))
+        st.write('The prediction price is:', forecast[forecast.ds == d]["yhat"])
+        st.write('The real price is:', last_prices[last_prices.ds == d]["y"])
+        st.markdown("""---""")
+        st.write("Maybe the predition wasn't to accurate.. but next time ill be using different timeseries libraries and tune they're parameters  to compare results.")
+
 
 
 
