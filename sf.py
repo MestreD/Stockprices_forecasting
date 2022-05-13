@@ -87,14 +87,15 @@ with features:
         st.write(m.plot(forecast))
         st.write(m.plot_components(forecast))
         st.markdown("""---""")
-        st.subheader("Lest test how close the prediction is!")
+        st.subheader("Lest test how close the prediction is for the 2022-05-05 !")
         last_prices = stock_data[len(stock_data)-20:]
         data = stock_data[:-20]
         model, forecast = model2(data)
         st.write(plot_plotly(model, forecast))
-        d = st.date_input("Select a date to compare the actual closing price against the model prediction price", datetime.date(2019, 7, 6))
-        st.write('The prediction price is:', forecast[forecast.ds == d]["yhat"])
-        st.write('The real price is:', last_prices[last_prices.ds == d]["y"])
+        #No funciona creo que es porque es de tipo datetime64 y ds en el df es tipo M8 ns
+        #d = st.date_input("Select a date to compare the actual closing price against the model prediction price", datetime.date(2019, 0o7, 0o6))
+        st.write('The prediction price is:', forecast[forecast.ds == "2022-05-05"]["yhat"])
+        st.write('The real price is:', last_prices[last_prices.ds == "2022-05-05"]["y"])
         st.markdown("""---""")
         st.write("Maybe the predition wasn't to accurate.. but next time ill be using different timeseries libraries and tune they're parameters  to compare results.")
 
