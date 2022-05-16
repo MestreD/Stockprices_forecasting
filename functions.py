@@ -40,5 +40,7 @@ def model2(data):
     # Train the model
     model = m.fit(data)
     future =  model.make_future_dataframe(periods=365)
-    forecast = model.predict(future)
-    return model,  forecast
+    prediction = model.predict(future)
+    return model,  prediction
+
+
