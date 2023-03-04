@@ -92,7 +92,7 @@ with dataset:
 
 with features:
     company = st.selectbox('Please select company ticker:',
-                                    ('None', "PEP", "MSFT", "TSLA", "AMZN", "BRK.B", "XOM",  "BAC"))    
+                                    ('None', 'PEP', "MSFT", "TSLA", "AMZN", "BRK.B", "XOM",  "BAC"))    
     if company == "None":
         st.write('You must select a ticker')  
     else:
