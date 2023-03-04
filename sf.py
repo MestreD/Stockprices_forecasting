@@ -32,10 +32,10 @@ def  get_data(ticker):
     stock_data.columns = ['y', 'ds']
     return  stock_data
 @st.cache 
-def get_name(ticker):
-    company = yf.Ticker(ticker)
-    company_name = company.info['longName']
-    return company_name
+#def get_name(ticker):
+ #   company = yf.Ticker(ticker)
+ #   company_name = company.info['longName']
+ #   return company_name
 @st.cache
 def prophet(stock_data):
     m = Prophet(interval_width=0.95, daily_seasonality=True)
