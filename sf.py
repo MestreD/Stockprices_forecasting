@@ -5,7 +5,7 @@ import pandas as pd
 import warnings; 
 warnings.simplefilter('ignore')
 
-import requests, json
+import requests
 
 #Yahoo Finance API´s
 import yahoo_fin.stock_info as yfi
@@ -39,13 +39,23 @@ def  get_data(ticker):
  #   company_name = company.info['longName']
  #   return company_name
  
+#def get_name(ticker):
+#    url = f'https://query1.finance.yahoo.com/v1/finance/search?q={ticker}&quotesCount=1&newsCount=0'
+ #   response = requests.get(url)
+  #  data = response.json()
+   # if data['quotes']:
+    #    return data['quotes'][0]['longname']
+   # else:
+    #    return None
 def get_name(ticker):
-    url = f'https://query1.finance.yahoo.com/v1/finance/search?q={ticker}&quotesCount=1&newsCount=0'
+    url = f"https://api.ifinance.co.uk/v1/info?ticker={ticker}"
     response = requests.get(url)
-    data = response.json()
-    if data['quotes']:
-        return data['quotes'][0]['longname']
+    if response.status_code == 200:
+        data = response.json()
+        company_name = data["company_name"]
+        return company_name
     else:
+        print(f"Failed to retrieve company information for ticker {ticker}.")
         return None
 @st.cache
 def prophet(stock_data):
