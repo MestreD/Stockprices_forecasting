@@ -39,7 +39,7 @@ def  get_data(ticker):
  #   company_name = company.info['longName']
  #   return company_name
  
- def get_name(ticker):
+def get_name(ticker):
     url = f'https://query1.finance.yahoo.com/v1/finance/search?q={ticker}&quotesCount=1&newsCount=0'
     response = requests.get(url)
     data = response.json()
