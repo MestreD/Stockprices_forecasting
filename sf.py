@@ -93,7 +93,7 @@ with features:
         col1, col_mid, col2 = st.columns((1, 0.1, 1))
         with col1:
             stock_data = get_data(company)
-            company_name = get_name(company)
+            #company_name = get_name(company)
 
             st.write(company_name)
             st.dataframe(stock_data)
