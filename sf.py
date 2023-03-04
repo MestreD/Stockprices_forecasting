@@ -34,7 +34,7 @@ def  get_data(ticker):
 @st.cache 
 def get_name(ticker):
     company = yf.Ticker(ticker)
-    company_name = company.info[]
+    company_name = company.info
     return company_name
  
 @st.cache
