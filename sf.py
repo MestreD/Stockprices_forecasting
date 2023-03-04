@@ -43,7 +43,6 @@ def get_name(ticker):
     url = f'https://query1.finance.yahoo.com/v1/finance/search?q={ticker}&quotesCount=1&newsCount=0'
     response = requests.get(url)
     data = response.json()
-
     if data['quotes']:
         return data['quotes'][0]['longname']
     else:
@@ -92,8 +91,8 @@ with dataset:
 
 with features:
     company = st.selectbox('Please select company ticker:',
-                                    ('None', 'PEP', "MSFT", "TSLA", "AMZN", "BRK.B", "XOM",  "BAC"))    
-    if company == "None":
+                                    ('None', 'PEP', 'MSFT', 'TSLA', 'AMZN', 'BRK.B', 'XOM',  'BAC'))    
+    if company == 'None':
         st.write('You must select a ticker')  
     else:
         st.write('\n')
