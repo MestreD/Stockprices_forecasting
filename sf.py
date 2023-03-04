@@ -5,6 +5,8 @@ import pandas as pd
 import warnings; 
 warnings.simplefilter('ignore')
 
+import requests
+
 #Yahoo Finance API´s
 import yahoo_fin.stock_info as yfi
 tickers = yfi.tickers_sp500()
@@ -36,6 +38,16 @@ def  get_data(ticker):
  #   company = yf.Ticker(ticker)
  #   company_name = company.info['longName']
  #   return company_name
+ 
+ def get_name(ticker):
+    url = f'https://query1.finance.yahoo.com/v1/finance/search?q={ticker}&quotesCount=1&newsCount=0'
+    response = requests.get(url)
+    data = response.json()
+
+    if data['quotes']:
+        return data['quotes'][0]['longname']
+    else:
+        return None
 @st.cache
 def prophet(stock_data):
     m = Prophet(interval_width=0.95, daily_seasonality=True)
@@ -93,7 +105,7 @@ with features:
         col1, col_mid, col2 = st.columns((1, 0.1, 1))
         with col1:
             stock_data = get_data(company)
-            #company_name = get_name(company)
+            company_name = get_name(company)
 
             st.write(company_name)
             st.dataframe(stock_data)
