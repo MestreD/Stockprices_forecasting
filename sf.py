@@ -5,7 +5,7 @@ import pandas as pd
 import warnings; 
 warnings.simplefilter('ignore')
 
-import requests
+import requests, json
 
 #Yahoo Finance API´s
 import yahoo_fin.stock_info as yfi
