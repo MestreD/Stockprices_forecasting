@@ -50,7 +50,7 @@ def get_name(ticker):
         company_name = 'Exxon Mobil'
     if company == 'BAC':
         company_name = 'Bank of America'
-        return company_name
+  return company_name
 #def get_name(ticker):
  #   company = yf.Ticker(ticker)
   #  company_name = company.info['LongName']
