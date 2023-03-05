@@ -32,10 +32,28 @@ def  get_data(ticker):
     stock_data.columns = ['y', 'ds']
     return  stock_data
 @st.cache 
+
 def get_name(ticker):
     company = yf.Ticker(ticker)
-    company_name = company.fast_info
-    return company_name
+    company_name = ''
+    IF company = 'PEP'
+        company_name = 'PepsiCo'
+    IF company = 'MSFT'
+        company_name = 'Microsoft'
+    IF company = 'TSLA'
+        company_name = 'Tesla'
+    IF company = 'AMZN'
+        company_name = 'Amazon'
+    If company = 'BRK.B'
+        company_name = 'Berkshire Hataway'
+    If company = 'XOM'
+        company_name = 'Exxon Mobil'
+   ELSE company_name = 'Bank Of America'
+   return company_name
+#def get_name(ticker):
+ #   company = yf.Ticker(ticker)
+  #  company_name = company.info['LongName']
+   # return company_name
  
 @st.cache
 def prophet(stock_data):
