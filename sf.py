@@ -34,7 +34,7 @@ def  get_data(ticker):
 @st.cache 
 
 def get_name(ticker):
-    company = yf.Ticker(ticker)
+    company = ticker
     company_name = ''
     if company == 'PEP':
         company_name = 'PepsiCo'
