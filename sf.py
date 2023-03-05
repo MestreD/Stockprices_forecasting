@@ -36,19 +36,19 @@ def  get_data(ticker):
 def get_name(ticker):
     company = yf.Ticker(ticker)
     company_name = ''
-    if company == 'PEP'
+    if company == 'PEP':
         company_name = 'PepsiCo'
-    if company == 'MSFT'
+    if company == 'MSFT':
         company_name = 'Microsoft'
-    if company == 'TSLA'
+    if company == 'TSLA':
         company_name = 'Tesla'
-    if company == 'AMZN'
+    if company == 'AMZN':
         company_name = 'Amazon'
-    if company == 'BRK.B'
+    if company == 'BRK.B':
         company_name = 'Berkshire Hataway'
-    if company == 'XOM'
+    if company == 'XOM':
         company_name = 'Exxon Mobil'
-    if company == 'BAC'
+    if company == 'BAC':
         company_name = 'Bank of America'
       return company_name
 #def get_name(ticker):
