@@ -137,7 +137,7 @@ with features:
         data = stock_data[:-20]
         
         model, prediction = prophet2(data)
-        d = st.date_input("Select a date to compare the actual closing price against the model prediction price for that day (Remember on weekends and holidays the market was closed):", datetime.date(2022,5,3))
+        d = st.date_input("Select a date to compare the actual closing price against the model prediction price for that day (Remember on weekends and holidays the market was closed):", datetime.date(2023,2,7))
         st.spinner(text="In progress...")
         with st.spinner('Wait until the running icon on the top right stops. It might take a couple of minutes...'):
             time.sleep(30)
